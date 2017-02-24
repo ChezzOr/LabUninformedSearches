@@ -54,7 +54,7 @@ class depth_node:
                         aux_path = copy.copy(self.path)
                         aux_path.append(x)
                         aux_path.append(y)
-                        time.sleep(.2)
+                        #time.sleep(.2)
                         node_aux = depth_node(strings_copy, self.depth + 1, aux_path)
                         #print("Child Expand")
                         node_aux.create_children()
@@ -127,11 +127,11 @@ if __name__ == "__main__":
             exit(0)
     while not found:
         for x in range(0, len(aux_tree)):
-            time.sleep(.2)
+            #time.sleep(.2)
             # print(aux_tree[x].__class__ == depth_node)
             if aux_tree[x].__class__ == depth_node:
                 temp = aux_tree[x].create_children()
-            print(temp)
+            #print(temp)
             if temp == "False":
                 found = True
                 print("No solution found")

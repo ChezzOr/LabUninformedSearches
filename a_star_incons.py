@@ -1,18 +1,25 @@
 import time
 import copy
 
+#heuristic: the quantity of rows in the space
 
-class breath_node:
+class a_node:
     strings = []
     depth = 1
     children = []
     solution = ""
     path = []
+    hcost = 0
 
-    def __init__(self, strings, depth, path):
+
+    def __init__(self, strings, depth, path, hcost):
         self.strings = strings
         self.depth = depth
         self.path = path
+        self.hcost = hcost
+
+    def get_cost(self):
+        return self.hcost
 
     def print_path(self, cost):
         return_path = ""
@@ -50,12 +57,13 @@ class breath_node:
                             cost += 1 + abs(x-y) + aux_path[1]
                             print(cost)
                             print(aux_path[0]+"(" + str(x) + ", " + str(y) + ")")
-                            return "True"
+                            return ["True", aux_path[0]+"(" + str(x) + ", " + str(y) + ")", cost]
 
                         aux_path = copy.copy(self.path)
                         aux_path.append(x)
                         aux_path.append(y)
-                        node_aux = breath_node(strings_copy, self.depth + 1, aux_path)
+                        #print(abs(x-y) + 1 + len(self.strings[x]))
+                        node_aux = a_node(strings_copy, self.depth + 1, aux_path, abs(x-y) + 1 + len(self.strings))
                         nodes.append(node_aux)
 
         if len(nodes) != 0:
@@ -118,12 +126,13 @@ if __name__ == "__main__":
     # print("Input:"+str(stringsin))
     # print("Goal:"+str(strings_goal))
 
-    breath_tree = breath_node(stringsin, 1, [])
+    breath_tree = a_node(stringsin, 1, [], 0)
 
     found = False
     aux_tree = []
     aux_tree.append(breath_tree)
     test = []
+
     for x in range(0, len(strings_goal)):
         if len(strings_goal[x]) > m_height:
             print("No solution found")
@@ -132,16 +141,19 @@ if __name__ == "__main__":
         #print("Lap")
         for x in range(0, len(aux_tree)):
             #time.sleep(.2)
-            # print(aux_tree[x].__class__ == breath_node)
-            if aux_tree[x].__class__ == breath_node:
+            #print("Node:"+str(aux_tree[x].strings)+" with cost: "+str(aux_tree[x].get_cost()))
+            if aux_tree[x].__class__ == a_node:
                 temp = aux_tree[x].create_children()
+
             #print(temp)
-            if temp == "True":
+            if temp[0] == "True":
                 found = True
                 #print("Found")
                 break
             test += temp
         else:
             aux_tree = copy.copy(test)
+            aux_tree.sort(key=lambda l: l.get_cost(), reverse=False)
+
             test = []
     exit(0)

@@ -57,21 +57,28 @@ class a_node:
                             cost += 1 + abs(x-y) + aux_path[1]
                             print(cost)
                             print(aux_path[0]+"(" + str(x) + ", " + str(y) + ")")
-                            return ["True", aux_path[0]+"(" + str(x) + ", " + str(y) + ")", cost]
+                            return "True"
 
                         aux_path = copy.copy(self.path)
                         aux_path.append(x)
                         aux_path.append(y)
                         #print(abs(x-y) + 1 + len(self.strings[x]))
                         node_aux = a_node(strings_copy, self.depth + 1, aux_path, abs(x-y) + 1 + len(self.strings))
-                        nodes.append(node_aux)
+                        auxhash = ""
+                        for ah in strings_copy:
+                            auxhash += str(ah) + ";"
+                        auxhash = hash(auxhash)
+                        if auxhash not in hashes:
+                            hashes.append(auxhash)
+                            nodes.append(node_aux)
 
         if len(nodes) != 0:
             return nodes
         else:
-            return "False"
+            return []
 
 result = []
+hashes = []
 # Defining the default method for execution
 if __name__ == "__main__":
     stringsin = []
@@ -146,7 +153,7 @@ if __name__ == "__main__":
                 temp = aux_tree[x].create_children()
 
             #print(temp)
-            if temp[0] == "True":
+            if temp == "True":
                 found = True
                 #print("Found")
                 break

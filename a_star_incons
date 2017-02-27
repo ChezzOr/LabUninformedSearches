@@ -1,2 +1,2 @@
 #!/bin/sh
-python a_star_incons.py
+python3 a_star_incons.py

@@ -1,2 +1,2 @@
 #!/bin/sh
-python bfs.py
+python3 bfs.py

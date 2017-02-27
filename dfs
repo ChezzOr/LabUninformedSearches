@@ -1,2 +1,2 @@
 #!/bin/sh
-python dfs.py
+python3 dfs.py

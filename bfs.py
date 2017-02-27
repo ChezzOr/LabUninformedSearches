@@ -56,14 +56,21 @@ class breath_node:
                         aux_path.append(x)
                         aux_path.append(y)
                         node_aux = breath_node(strings_copy, self.depth + 1, aux_path)
-                        nodes.append(node_aux)
+                        auxhash = ""
+                        for ah in strings_copy:
+                            auxhash += str(ah) + ";"
+                        auxhash = hash(auxhash)
+                        if auxhash not in hashes:
+                            hashes.append(auxhash)
+                            nodes.append(node_aux)
 
         if len(nodes) != 0:
             return nodes
         else:
-            return "False"
+            return []
 
 result = []
+hashes = []
 # Defining the default method for execution
 if __name__ == "__main__":
     stringsin = []

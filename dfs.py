@@ -31,7 +31,7 @@ class depth_node:
                 move = self.strings[x][-1:]
                 #print("Move:" + str(move) + " at depth:" + str(self.depth))
                 for y in range(0, len(self.strings)):
-                    if len(self.strings[y]) + 1 > m_height or self.depth >= 4:
+                    if len(self.strings[y]) + 1 > m_height or self.depth >= 5:
                         break
                     if x != y:
                         strings_copy = copy.copy(self.strings)
@@ -57,10 +57,17 @@ class depth_node:
                         #time.sleep(.2)
                         node_aux = depth_node(strings_copy, self.depth + 1, aux_path)
                         #print("Child Expand")
-                        node_aux.create_children()
+                        auxhash = ""
+                        for ah in strings_copy:
+                            auxhash += str(ah) + ";"
+                        auxhash = hash(auxhash)
+                        if auxhash not in hashes:
+                            hashes.append(auxhash)
+                            node_aux.create_children()
         return "False"
 
 result = []
+hashes = []
 # Defining the default method for execution
 if __name__ == "__main__":
     stringsin = []

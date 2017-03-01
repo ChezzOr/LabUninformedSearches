@@ -83,8 +83,6 @@ hashes = []
 # Defining the default method for execution
 if __name__ == "__main__":
     stringsin = []
-    sys.stdin.flush()
-    sys.stdout.flush()
     m_height = int(input())
     received = input()
     goal = input()
@@ -146,7 +144,8 @@ if __name__ == "__main__":
     for x in range(0, len(strings_goal)):
         if len(strings_goal[x]) > m_height:
             print("No solution found")
-            exit(0)
+            found = True
+
     while not found:
         #print("Lap")
         for x in range(0, len(aux_tree)):

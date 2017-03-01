@@ -163,4 +163,3 @@ if __name__ == "__main__":
             aux_tree.sort(key=lambda l: l.get_cost(), reverse=False)
 
             test = []
-    exit(0)

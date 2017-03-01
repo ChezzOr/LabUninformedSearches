@@ -63,7 +63,7 @@ class a_node:
                         aux_path.append(x)
                         aux_path.append(y)
                         #print(abs(x-y) + 1 + len(self.strings[x]))
-                        node_aux = a_node(strings_copy, self.depth + 1, aux_path, abs(x-y) * 2 + 1 + len(self.strings[x]))
+                        node_aux = a_node(strings_copy, self.depth + 1, aux_path, 1 + len(self.strings[x]) - abs(x-y))
                         auxhash = ""
                         for ah in strings_copy:
                             auxhash += str(ah)+";"

@@ -1,5 +1,6 @@
 import time
 import copy
+import sys
 
 #heuristic: the level of the box plus the distance that separates it from its place in the final state
 
@@ -82,6 +83,8 @@ hashes = []
 # Defining the default method for execution
 if __name__ == "__main__":
     stringsin = []
+    sys.stdin.flush()
+    sys.stdout.flush()
     m_height = int(input())
     received = input()
     goal = input()

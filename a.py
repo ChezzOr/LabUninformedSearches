@@ -125,7 +125,7 @@ if __name__ == "__main__":
 
     for x in range(0,len(strings_goal)):
         # print(strings_goal[x])
-        if strings_goal[x] == ['X']:
+        if strings_goal[x] == ['X'] or  strings_goal[x] == ['x'] :
             result.append(False)
         else:
             result.append(True)
